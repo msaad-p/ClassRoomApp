@@ -1,8 +1,18 @@
 package com.example.APIClassRoom.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import org.hibernate.annotations.ManyToAny;
+
 public class Course {
     private Integer id;
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_teacher", referencedColumnName = "id")
+            @JsonBackReference
+    Teacher teacher;
 
     public Course() {
     }
