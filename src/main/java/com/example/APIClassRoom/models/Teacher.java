@@ -1,12 +1,19 @@
 package com.example.APIClassRoom.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "teachers")
 public class Teacher {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_teacher")
     private Integer id;
+
+    @Column(length = 100, nullable = false)
     private String expertise;
 
     @OneToMany(mappedBy = "teacher")
@@ -35,5 +42,13 @@ public class Teacher {
 
     public void setExpertise(String expertise) {
         this.expertise = expertise;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
